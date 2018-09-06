@@ -4,14 +4,15 @@
 # pip install --upgrade watson-developer-cloud
 
 from __future__ import print_function
-import os, re, requests
-from requests.auth import HTTPBasicAuth
-from requests.auth import HTTPDigestAuth
-from bs4 import BeautifulSoup, Comment
-from watson_developer_cloud import DiscoveryV1
+
 import json
-from os.path import join, dirname
+import os
+import re
+import requests
+
+from bs4 import BeautifulSoup
 from watson_developer_cloud import PersonalityInsightsV3
+
 
 def _clean_soup(html):
   soup = BeautifulSoup(html, "html5lib")
