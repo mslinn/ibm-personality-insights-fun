@@ -41,6 +41,5 @@ def fetch_posting(url):
   else: # everything is fine
     return re.sub("(\t| )+" , " ", re.sub("(\n|\r)+" , "\n", container)).strip()
 
-#fetch_posting('https://blog.mslinn.com/blog/2017/10/15/61')
 print(fetch_posting('https://blog.mslinn.com/blog/2017/10/15/61'))
-#print(fetch_posting('https://blog.mslinn.com/blog/2008/04/28/cult-of-software-god'))
+print(fetch_posting('https://blog.mslinn.com/blog/2008/04/28/cult-of-software-god'))
