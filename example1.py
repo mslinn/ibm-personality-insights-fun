@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-# pip install lxml requests html5lib
-# pip install --upgrade watson-developer-cloud
+# pip install --upgrade requests html5lib watson-developer-cloud
 
 from __future__ import print_function
 
