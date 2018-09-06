@@ -56,7 +56,7 @@ If you don't put that character there, the path is interpreted as the text analy
 ## Python
 
 I found the 
-[Python docstring for the constructor](https://github.com/watson-developer-cloud/python-sdk/blob/master/watson_developer_cloud/personality_insights_v3.py#L63-L102) 
+[Python docstring for the PersonalityInsightsV3 constructor](https://github.com/watson-developer-cloud/python-sdk/blob/master/watson_developer_cloud/personality_insights_v3.py#L63-L102) 
 to be helpful.
 I got a little more ambitious with the Python version: it reads two blog postings I wrote, combines them, and
 submits them for analysis. [Here is the resulting JSON](example1b.json).

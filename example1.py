@@ -26,24 +26,27 @@ def _clean_soup(html):
 
   for element in soup.find_all('a', class_='dsq-brlink'):
     element.decompose()
+
   #for element in soup.find_all(text=lambda text:isinstance(text, Comment)):
     #element.decompose()
+
   return soup
 
 def _fetch_posting(url):
   """Returns contents of <div class='container'></div>"""
-  posting_page = requests.get(url)
-  soup = _clean_soup(posting_page.content)
+  print(f"""Fetching {url}""")
   try:
-    container = soup.find('div', class_='container').get_text()
+    posting_page = requests.get(url)
   except urllib.request.URLError as e:
-    puts("""The server couldn't reach #{url}.""")
+    print("""The server couldn't reach #{url}.""")
     if hasattr(e, 'reason'):
       print('Reason: ', e.reason)
     elif hasattr(e, 'code'):
       print('Error code: ', e.code)
     return ""
   else: # everything is fine
+    soup = _clean_soup(posting_page.content)
+    container = soup.find('div', class_='container').get_text()
     return re.sub("(\t| )+" , " ", re.sub("(\n|\r)+" , "\n", container)).strip()
 
 def insights(user_text):
@@ -62,6 +65,7 @@ def insights(user_text):
         https://console.bluemix.net/docs/resources/service_credentials.html#service_credentials
   """
 
+  print("Analysing")
   insights = PersonalityInsightsV3(
     version = '2017-10-13',
     username = os.environ.get("PI_USERNAME"),
@@ -76,8 +80,18 @@ def insights(user_text):
     consumption_preferences = True
   )
 
+"""Combine the text from 2 blog postings and analyse them; save the json"""
 posting1 = _fetch_posting('https://blog.mslinn.com/blog/2017/10/15/61')
 posting2 = _fetch_posting('https://blog.mslinn.com/blog/2008/04/28/cult-of-software-god')
 combined_postings = posting1 + posting2
 insightful_json = insights(combined_postings)
-print(json.dumps(insightful_json, indent=2))
+
+print("Saving to example1b.json")
+with open("example1b.json", 'w') as f:
+  json.dump(insightful_json,
+    fp = f,
+    indent=2,
+    separators=(',', ': '),
+    sort_keys=True)
+  # add trailing newline for POSIX compatibility
+  f.write('\n')
