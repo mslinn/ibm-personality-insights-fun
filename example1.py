@@ -88,10 +88,12 @@ insightful_json = insights(combined_postings)
 
 print("Saving to example1b.json")
 with open("example1b.json", 'w') as f:
-  json.dump(insightful_json,
+  json.dump(
+    obj = insightful_json,
     fp = f,
-    indent=2,
-    separators=(',', ': '),
-    sort_keys=True)
+    indent = 2,
+    separators = (',', ': '),
+    sort_keys = True
+  )
   # add trailing newline for POSIX compatibility
   f.write('\n')
