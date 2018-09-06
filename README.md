@@ -1,6 +1,6 @@
 # Fun With IBM Personality Insights
 
-In this project I use Python 3 to play around with [IBM Personality Insights](https://console.bluemix.net/docs/services/personality-insights).
+In this project I use `curl` and Python 3 to play around with [IBM Personality Insights](https://console.bluemix.net/docs/services/personality-insights).
 I used [IBM's free Lite service](https://console.bluemix.net/catalog/services/personality-insights),
 which provides 1,000 API calls per month at no cost, and deploy to the US South region.
 
@@ -20,6 +20,7 @@ The Getting Started examples use `curl` to call methods of the HTTP interface.
 Ubuntu's version of `curl` installed by default is the correct version.
 
 I used <a href="https://stedolan.github.io/jq/"><code>jq</code></a> to pretty-print the returned JSON.
+Here is how to install it in Ubuntu:
 
 ```
 $ sudo apt install jq
@@ -27,7 +28,8 @@ $ sudo apt install jq
 
 [Step 1](https://console.bluemix.net/docs/services/personality-insights/getting-started.html#gettingStarted)
 of the Getting Started instructions has a serious error: instead of providing the `apiKey`,
-your `username:password` must be provided. 
+your `username:password` must be provided.
+Because I did not want to hard-code credentials into a program, I defined environment variables to hold this sensitive data.
 
 ```
 export PI_USERNAME="999999-8888-7777-6666-12345678" # replace with your Personality Insights username
@@ -35,7 +37,7 @@ export PI_PASSWORD="zYxWv"                          # replace with your Personal
 ```
 
 ## Curl
-The Getting Started instructions show a curl example, which I modified as shown.
+The IBM Personality Insights Getting Started instructions show a `curl` example, which I modified as shown.
 I then wrote a simple Python equivalent, shown in the next section.
 
 ```
@@ -58,5 +60,6 @@ If you don't put that character there, the path is interpreted as the text analy
 I found the 
 [Python docstring for the PersonalityInsightsV3 constructor](https://github.com/watson-developer-cloud/python-sdk/blob/master/watson_developer_cloud/personality_insights_v3.py#L63-L102) 
 to be helpful.
-I got a little more ambitious with the Python version: it reads two blog postings I wrote, combines them, and
+The Python version is more ambitious than the `curl` version; 
+the Python version reads two blog postings, combines them, and
 submits them for analysis. [Here is the resulting JSON](example1b.json).
