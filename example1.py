@@ -13,7 +13,7 @@ import json
 from os.path import join, dirname
 from watson_developer_cloud import PersonalityInsightsV3
 
-def cleanSoup(html):
+def _clean_soup(html):
   soup = BeautifulSoup(html, "html5lib")
 
   for tag in ['script', 'style', 'meta', 'noscript']:
@@ -29,10 +29,10 @@ def cleanSoup(html):
     #element.decompose()
   return soup
 
-def fetch_posting(url):
+def _fetch_posting(url):
   """Returns contents of <div class='container'></div>"""
   posting_page = requests.get(url)
-  soup = cleanSoup(posting_page.content)
+  soup = _clean_soup(posting_page.content)
   try:
     container = soup.find('div', class_='container').get_text()
   except urllib.request.URLError as e:
@@ -75,8 +75,8 @@ def insights(user_text):
     consumption_preferences = True
   )
 
-posting1 = fetch_posting('https://blog.mslinn.com/blog/2017/10/15/61')
-posting2 = fetch_posting('https://blog.mslinn.com/blog/2008/04/28/cult-of-software-god')
+posting1 = _fetch_posting('https://blog.mslinn.com/blog/2017/10/15/61')
+posting2 = _fetch_posting('https://blog.mslinn.com/blog/2008/04/28/cult-of-software-god')
 combined_postings = posting1 + posting2
 insightful_json = insights(combined_postings)
 print(json.dumps(insightful_json, indent=2))
