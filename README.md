@@ -46,7 +46,7 @@ curl -sSX POST --user "$PI_USERNAME:$PI_PASSWORD" \
   --header "Content-Type: text/plain;charset=utf-8" \
   --header "Accept: application/json" \
   --data-binary @"$PATH_OF_TEXT_TO_ANALYSE" \
-  "https://gateway.watsonplatform.net/personality-insights/api/v3/profile?version=2017-10-13" \
+  "https://gateway.watsonplatform.net/personality-insights/api/v3/profile?version=2017-10-13" | \
   jq .
 ```
 
